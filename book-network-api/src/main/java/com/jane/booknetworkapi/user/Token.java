@@ -18,7 +18,7 @@ public class Token {
     private Integer id;
     private String token;
     private LocalDateTime createdAt;
-    private LocalDateTime expires;
+    private LocalDateTime expiresAt;
     private LocalDateTime validatedAt;
 
     @ManyToOne
