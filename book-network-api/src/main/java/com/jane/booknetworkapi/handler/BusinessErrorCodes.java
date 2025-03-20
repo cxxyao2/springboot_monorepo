@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 
 public enum BusinessErrorCodes {
 
+    DUPLICATE_KEY_ERROR(409, HttpStatus.BAD_REQUEST, "Duplicate Key"),
     NO_CODE(0,HttpStatus.NOT_IMPLEMENTED,"No code"),
     ACCOUNT_LOCKED(302, HttpStatus.FORBIDDEN, "User account is locked"),
     NEW_PASSWORD_DOES_NOT_MATCH(301, HttpStatus.BAD_REQUEST, "The new password does not match"),
