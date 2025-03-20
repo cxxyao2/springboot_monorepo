@@ -8,4 +8,8 @@ docker run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432
 
 ```
 ## screenshots
-![dependencies](https://github.com/cxxyao2/springboot_monorepo/blob/main/booknetworkapi-dependencies.png)
+- dependencies
+![dependencies](booknetworkapi-dependencies.png)
+- swagger openapi
+![swagger](11-swagger-openapi.png)
+
