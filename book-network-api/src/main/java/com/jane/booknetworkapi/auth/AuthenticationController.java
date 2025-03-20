@@ -6,13 +6,12 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
-@Tag(name = "Authentication")
+@Tag(name = "Authentication")   // swagger. openapi documentation
 public class AuthenticationController {
     private final AuthenticationService service;
 
@@ -25,4 +24,8 @@ public class AuthenticationController {
         return ResponseEntity.accepted().build();
     }
 
+    @GetMapping("/hello")
+    public ResponseEntity<?> hello() {
+        return ResponseEntity.ok("Hello World!");
+    }
 }
