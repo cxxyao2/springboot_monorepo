@@ -1,6 +1,7 @@
 package com.jane.booknetworkapi.config;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,17 +18,23 @@ import org.springframework.web.filter.CorsFilter;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
 public class BeansConfig {
     private final UserDetailsService userDetailsService;
 
+    @Value("${application.frontend-urls}")
+    private String frontend_url;
+
     @Bean
     public CorsFilter corsFilter() {
+        System.out.println("corsFilter includes " + frontend_url);
+        String[] frontends = frontend_url.split(",");
         CorsConfiguration config = new CorsConfiguration();
         // 允许特定的源
-        config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        config.setAllowedOrigins(List.of(frontends));
         // 允许所有的 HTTP 方法
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // 允许所有的请求头
