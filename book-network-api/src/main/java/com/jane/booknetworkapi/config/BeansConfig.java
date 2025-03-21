@@ -10,11 +10,37 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Configuration
 @RequiredArgsConstructor
 public class BeansConfig {
     private final UserDetailsService userDetailsService;
+
+    @Bean
+    public CorsFilter corsFilter() {
+        CorsConfiguration config = new CorsConfiguration();
+        // 允许特定的源
+        config.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        // 允许所有的 HTTP 方法
+        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        // 允许所有的请求头
+        config.setAllowedHeaders(Arrays.asList("*"));
+        // 允许携带凭证（如 cookie）
+        config.setAllowCredentials(true);
+
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        // 对所有的 URL 都应用 CORS 配置
+        source.registerCorsConfiguration("/**", config);
+
+        return new CorsFilter(source);
+    }
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
