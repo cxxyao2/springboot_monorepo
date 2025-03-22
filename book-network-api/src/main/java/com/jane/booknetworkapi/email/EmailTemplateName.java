@@ -1,7 +1,6 @@
 package com.jane.booknetworkapi.email;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
 public enum EmailTemplateName {
