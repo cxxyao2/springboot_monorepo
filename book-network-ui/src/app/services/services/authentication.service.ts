@@ -18,6 +18,8 @@ import { confirm } from '../fn/authentication/confirm';
 import { Confirm$Params } from '../fn/authentication/confirm';
 import { hello } from '../fn/authentication/hello';
 import { Hello$Params } from '../fn/authentication/hello';
+import { refreshToken } from '../fn/authentication/refresh-token';
+import { RefreshToken$Params } from '../fn/authentication/refresh-token';
 import { register } from '../fn/authentication/register';
 import { Register$Params } from '../fn/authentication/register';
 
@@ -53,6 +55,31 @@ export class AuthenticationService extends BaseService {
       map((r: StrictHttpResponse<{
 }>): {
 } => r.body)
+    );
+  }
+
+  /** Path part for operation `refreshToken()` */
+  static readonly RefreshTokenPath = '/auth/refresh-token';
+
+  /**
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `refreshToken()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  refreshToken$Response(params?: RefreshToken$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return refreshToken(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `refreshToken$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  refreshToken(params?: RefreshToken$Params, context?: HttpContext): Observable<void> {
+    return this.refreshToken$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

@@ -41,6 +41,19 @@
         }
       }
     },
+    "/auth/refresh-token": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "operationId": "refreshToken",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/auth/authenticate": {
       "post": {
         "tags": [
@@ -162,7 +175,10 @@
       "AuthenticationResponse": {
         "type": "object",
         "properties": {
-          "token": {
+          "accessToken": {
+            "type": "string"
+          },
+          "refreshToken": {
             "type": "string"
           }
         }
