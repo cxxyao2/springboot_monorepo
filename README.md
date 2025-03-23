@@ -10,14 +10,14 @@ springdoc-openapi-starter-webmvc-ui 2.8.5
 
 ## relevant docker commands(maildev && postgres)
 ```bath
-docker run -p 1080:1080 -p 1025:1025 maildev/maildev
+docker run -p 1080:1080 -p 1025:1025 maildev/maildev  -d maildev
 
 docker run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432 -d postgres
 
 ```
 ## screenshots
 - dependencies
-![dependencies](booknetworkapi-dependencies.png)
+![dependencies](screenshots/booknetworkapi-dependencies.png)
 - swagger openapi
-![swagger](11-swagger-openapi.png)
+![swagger](screenshots/11-swagger-openapi.png)
 
