@@ -23,16 +23,15 @@ import java.util.List;
 public class BeansConfig {
     private final UserDetailsService userDetailsService;
 
-    @Value("${application.frontend-urls}")
-    private String frontend_url;
+    @Value("${application.cors.origins:*}")
+    private List<String> allowedOrigins;
 
     @Bean
     public CorsFilter corsFilter() {
-        System.out.println("corsFilter includes " + frontend_url);
-        String[] frontends = frontend_url.split(",");
+
         CorsConfiguration config = new CorsConfiguration();
         // 允许特定的源
-        config.setAllowedOrigins(List.of(frontends));
+        config.setAllowedOrigins(allowedOrigins);
         // 允许所有的 HTTP 方法
         config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         // 允许所有的请求头
