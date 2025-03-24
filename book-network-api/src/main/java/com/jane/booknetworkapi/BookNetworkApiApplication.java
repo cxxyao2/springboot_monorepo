@@ -19,14 +19,17 @@ public class BookNetworkApiApplication {
     }
 
     @Bean
-    public CommandLineRunner runner(RoleRepository roleRepository){
+    public CommandLineRunner runner(RoleRepository roleRepository) {
         return args -> {
-            if(roleRepository.findByName("USER").isEmpty() ){
-                roleRepository.save(
-                        Role.builder().name("USER").build()
-                );
-            }
+            createRoleIfNotExists(roleRepository, "USER");
+            createRoleIfNotExists(roleRepository, "ADMIN");
         };
+    }
+
+    private void createRoleIfNotExists(RoleRepository roleRepository, String roleName) {
+        if (roleRepository.findByName(roleName).isEmpty()) {
+            roleRepository.save(Role.builder().name(roleName).build());
+        }
     }
 
 }

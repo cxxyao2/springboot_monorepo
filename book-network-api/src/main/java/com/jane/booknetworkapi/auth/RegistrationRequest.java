@@ -1,5 +1,6 @@
 package com.jane.booknetworkapi.auth;
 
+import com.jane.booknetworkapi.role.Role;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Getter
 @Setter
@@ -30,5 +32,8 @@ public class RegistrationRequest {
     @NotBlank(message = "Password is mandatory")
     @Size(min = 8, message = "Password should be 8 characters long mininum" )
     private String password;
+
+    @NotEmpty(message = "Roles are mandatory")
+    private List<String> roles;
 
 }

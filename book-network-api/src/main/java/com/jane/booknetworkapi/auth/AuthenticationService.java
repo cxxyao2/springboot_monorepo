@@ -42,9 +42,12 @@ public class AuthenticationService {
     private String activationUrl;
 
     public AuthenticationResponse register(RegistrationRequest request) throws MessagingException {
-        var userRole = roleRepository.findByName("USER")
-                // todo. better exception handling
-                .orElseThrow(() -> new IllegalStateException("User Role was not initiated"));
+
+        var roles = request.getRoles()
+                .stream()
+                .map(roleName -> roleRepository.findByName(roleName)
+                        .orElseThrow(() -> new UsernameNotFoundException("Role " + roleName + " not found")))
+                .toList();
 
         var user = User.builder()
                 .firstname(request.getFirstname())
@@ -53,7 +56,7 @@ public class AuthenticationService {
                 .password(passwordEncoder.encode(request.getPassword()))
                 .accountLocked(false)
                 .enabled(false)
-                .roles(List.of(userRole))
+                .roles(roles)
                 .build();
         var savedUser = userRepository.save(user);
         var accessToken = jwtService.generateToken(savedUser);
@@ -61,9 +64,9 @@ public class AuthenticationService {
         saveUserToken(savedUser, accessToken);
         sendValidationEmail(user);
         return AuthenticationResponse.builder()
-                        .accessToken(accessToken)
-                                .refreshToken(refreshToken)
-                                        .build();
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .build();
 
     }
 
@@ -162,10 +165,10 @@ public class AuthenticationService {
         if (userEmail != null) {
             var user = userRepository.findByEmail(userEmail)
                     .orElseThrow();
-            if(jwtService.isTokenValid(refreshToken, user)) {
+            if (jwtService.isTokenValid(refreshToken, user)) {
                 var accessToken = jwtService.generateToken(user);
                 revokeAllUserTokens(user);  // todo
-                saveUserToken(user,accessToken);  // todo
+                saveUserToken(user, accessToken);  // todo
                 var authResponse = AuthenticationResponse.builder()
                         .accessToken(accessToken)
                         .refreshToken(refreshToken)
@@ -190,7 +193,7 @@ public class AuthenticationService {
 
     private void revokeAllUserTokens(User user) {
         var validUserTokens = tokenRepository.findAllValidTokensByUser(user.getId());
-        if(validUserTokens.isEmpty()) {
+        if (validUserTokens.isEmpty()) {
             return;
         }
         validUserTokens.forEach(token -> {
