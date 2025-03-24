@@ -41,4 +41,4 @@ application:
     frontend:
       activation-url: http://localhost:4200/activation-account
 server:
-  port: 8080
+  port: 8088

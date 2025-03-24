@@ -20,4 +20,6 @@ docker run --name my-postgres -e POSTGRES_PASSWORD=mysecretpassword -p 5432:5432
 ![dependencies](screenshots/booknetworkapi-dependencies.png)
 - swagger openapi
 ![swagger](screenshots/11-swagger-openapi.png)
+- docker compose
+![docker-compose](/screenshots/docker-compose-up.png)
 
