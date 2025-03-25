@@ -7,4 +7,5 @@ export interface RegistrationRequest {
   firstname: string;
   lastname: string;
   password: string;
+  roles: Array<string>;
 }

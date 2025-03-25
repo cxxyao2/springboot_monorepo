@@ -16,8 +16,6 @@ import { Authenticate$Params } from '../fn/authentication/authenticate';
 import { AuthenticationResponse } from '../models/authentication-response';
 import { confirm } from '../fn/authentication/confirm';
 import { Confirm$Params } from '../fn/authentication/confirm';
-import { hello } from '../fn/authentication/hello';
-import { Hello$Params } from '../fn/authentication/hello';
 import { refreshToken } from '../fn/authentication/refresh-token';
 import { RefreshToken$Params } from '../fn/authentication/refresh-token';
 import { register } from '../fn/authentication/register';
@@ -105,35 +103,6 @@ export class AuthenticationService extends BaseService {
   authenticate(params: Authenticate$Params, context?: HttpContext): Observable<AuthenticationResponse> {
     return this.authenticate$Response(params, context).pipe(
       map((r: StrictHttpResponse<AuthenticationResponse>): AuthenticationResponse => r.body)
-    );
-  }
-
-  /** Path part for operation `hello()` */
-  static readonly HelloPath = '/auth/hello';
-
-  /**
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `hello()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  hello$Response(params?: Hello$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-}>> {
-    return hello(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `hello$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  hello(params?: Hello$Params, context?: HttpContext): Observable<{
-}> {
-    return this.hello$Response(params, context).pipe(
-      map((r: StrictHttpResponse<{
-}>): {
-} => r.body)
     );
   }
 

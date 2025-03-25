@@ -9,13 +9,14 @@ import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
 
-export interface Hello$Params {
+export interface ReturnBorrowedBook$Params {
+  'book-id': number;
 }
 
-export function hello(http: HttpClient, rootUrl: string, params?: Hello$Params, context?: HttpContext): Observable<StrictHttpResponse<{
-}>> {
-  const rb = new RequestBuilder(rootUrl, hello.PATH, 'get');
+export function returnBorrowedBook(http: HttpClient, rootUrl: string, params: ReturnBorrowedBook$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+  const rb = new RequestBuilder(rootUrl, returnBorrowedBook.PATH, 'patch');
   if (params) {
+    rb.path('book-id', params['book-id'], {});
   }
 
   return http.request(
@@ -23,10 +24,9 @@ export function hello(http: HttpClient, rootUrl: string, params?: Hello$Params, 
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<{
-      }>;
+      return (r as HttpResponse<any>).clone({ body: parseFloat(String((r as HttpResponse<any>).body)) }) as StrictHttpResponse<number>;
     })
   );
 }
 
-hello.PATH = '/auth/hello';
+returnBorrowedBook.PATH = '/books/borrow/return/{book-id}';

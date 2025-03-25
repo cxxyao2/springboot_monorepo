@@ -10,7 +10,6 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.security.SecurityScheme;
 import io.swagger.v3.oas.annotations.servers.Server;
 
-import static com.sun.beans.introspect.PropertyInfo.Name.description;
 
 @OpenAPIDefinition(
         info = @Info(

@@ -23,7 +23,7 @@ public class BookController {
         return ResponseEntity.ok(service.save(request, connectedUser));
     }
 
-    @GetMapping("${book-id}")
+    @GetMapping("{book-id}")
     public ResponseEntity<BookResponse> getBookById(@PathVariable("book-id") Integer bookId) {
         return ResponseEntity.ok(service.findById(bookId));
     }
@@ -65,7 +65,7 @@ public class BookController {
         return ResponseEntity.ok(service.findAllReturnedBooks(page, size, connectedUser));
     }
 
-    @PatchMapping("/shareable/${book-id}")
+    @PatchMapping("/shareable/{book-id}")
     public ResponseEntity<Integer> updateShareableStatus(
             @PathVariable("book-id") Integer bookId,
             Authentication connectedUser
@@ -73,7 +73,7 @@ public class BookController {
         return ResponseEntity.ok(service.updateShareableStatus(bookId, connectedUser));
     }
 
-    @PatchMapping("/archived/${book-id}")
+    @PatchMapping("/archived/{book-id}")
     public ResponseEntity<Integer> updateArchivedStatus(
             @PathVariable("book-id") Integer bookId,
             Authentication connectedUser
@@ -81,15 +81,16 @@ public class BookController {
         return ResponseEntity.ok(service.updateArchivedStatus(bookId, connectedUser));
     }
 
-    @PostMapping("/borrow/${book-id}")
+
+    @PatchMapping("/borrow/{book-id}")
     public ResponseEntity<Integer> borrowBook(
-            @PathVariable("book-id") Integer bookId,
+            @PathVariable Integer bookId,
             Authentication connectedUser
     ) {
         return ResponseEntity.ok(service.borrowBook(bookId, connectedUser));
     }
 
-    @PatchMapping("/borrow/return/${book-id}")
+    @PatchMapping("/borrow/return/{book-id}")
     public ResponseEntity<Integer> returnBorrowedBook(
             @PathVariable("book-id") Integer bookId,
             Authentication connectedUser
@@ -98,7 +99,7 @@ public class BookController {
     }
 
 
-    @PatchMapping("/borrow/return/approve/${book-id}")
+    @PatchMapping("/borrow/return/approve/{book-id}")
     public ResponseEntity<Integer> approveReturnBorrowedBook(
             @PathVariable("book-id") Integer bookId,
             Authentication connectedUser
