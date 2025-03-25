@@ -63,10 +63,10 @@ public class BeansConfig {
         return config.getAuthenticationManager();
     }
 
-//    @Bean  todo
-//    public AuditorAware<Integer> auditorAware() {
-//        return new ApplicationAuditWare();
-//    }
+    @Bean
+    public AuditorAware<Integer> auditorAware() {
+        return new ApplicationAuditAware();
+    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
