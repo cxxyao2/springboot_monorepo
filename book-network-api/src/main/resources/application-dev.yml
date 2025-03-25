@@ -31,7 +31,7 @@ spring:
 
 application:
   cors:
-    origins: http://localhost:4200,http://localhost:55732,http://example.com
+    origins: http://localhost:4200,http://localhost:58554,http://example.com
   security:
     jwt:
       secret-key: ed4567941d41435e64aaf3d0850ba4cb1b3df3e58117a8741e4e57eb2e87a624dc2111e5fdedd4c37cf8e44083bfe2a4289b54735d635fdf08d9dbc4b8a300d8804fa27770b60ea022a4988dbf577e0138d0a6697f0e6a563e61911e577961b961638a81dc8f6b818c593eb846985aab4aeb2f8b2002cf19a4bc93690c624c5205882397300e51067496895c3025a7ce5703ec2a7dc4739b6e3b0a5186d0fc8b3af3e1b57ffb82e6c085cd37d2cc1c1d2f0dffe35e1857b2fe54ccbf198804f27cec71139415abd1c9dc1ac4a0d3c0026d259ee6838b3fa4c7e945b21fd4f230

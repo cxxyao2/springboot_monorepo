@@ -3,10 +3,11 @@ import {Router} from '@angular/router';
 import {BookService} from '../../services/services/book.service';
 import {PageResponseBookResponse} from '../../services/models/page-response-book-response';
 import {CommonModule} from '@angular/common';
+import {BookCardComponent} from '../book-card/book-card.component';
 
 @Component({
   selector: 'app-book-list',
-  imports: [CommonModule],
+  imports: [CommonModule, BookCardComponent],
   templateUrl: './book-list.component.html',
   styleUrl: './book-list.component.scss'
 })

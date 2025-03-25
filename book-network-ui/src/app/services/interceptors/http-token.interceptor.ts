@@ -12,14 +12,6 @@ export const httpTokenInterceptor: HttpInterceptorFn = (req, next) => {
     return next(newReq);
   }
 
-  // if(token) {
-  //   const authReq = req.clone({
-  //     headers: new HttpHeaders({
-  //       'Authorization': 'Bearer ' + token,
-  //     })
-  //   });
-  // }
-
   return next(req);
 
 
