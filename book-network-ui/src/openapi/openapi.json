@@ -145,12 +145,12 @@
         "tags": [
           "Book"
         ],
-        "operationId": "saveBook",
+        "operationId": "addNewBook",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BookRequest"
+                "$ref": "#/components/schemas/BookCreateRequest"
               }
             }
           },
@@ -171,7 +171,7 @@
         }
       }
     },
-    "/books/cover/{book-id}": {
+    "/books/cover/{bookId}": {
       "post": {
         "tags": [
           "Book"
@@ -179,7 +179,7 @@
         "operationId": "uploadBookCoverPicture",
         "parameters": [
           {
-            "name": "book-id",
+            "name": "bookId",
             "in": "path",
             "required": true,
             "schema": {
@@ -293,7 +293,7 @@
         }
       }
     },
-    "/books/shareable/{book-id}": {
+    "/books/shareable/{bookId}": {
       "patch": {
         "tags": [
           "Book"
@@ -301,7 +301,7 @@
         "operationId": "updateShareableStatus",
         "parameters": [
           {
-            "name": "book-id",
+            "name": "bookId",
             "in": "path",
             "required": true,
             "schema": {
@@ -325,13 +325,23 @@
         }
       }
     },
-    "/books/borrow/{book-id}": {
+    "/books/borrow/{bookId}": {
       "patch": {
         "tags": [
           "Book"
         ],
         "operationId": "borrowBook",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "bookId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -347,7 +357,7 @@
         }
       }
     },
-    "/books/borrow/return/{book-id}": {
+    "/books/borrow/return/{bookId}": {
       "patch": {
         "tags": [
           "Book"
@@ -355,7 +365,7 @@
         "operationId": "returnBorrowedBook",
         "parameters": [
           {
-            "name": "book-id",
+            "name": "bookId",
             "in": "path",
             "required": true,
             "schema": {
@@ -379,7 +389,7 @@
         }
       }
     },
-    "/books/borrow/return/approve/{book-id}": {
+    "/books/borrow/return/approve/{bookId}": {
       "patch": {
         "tags": [
           "Book"
@@ -387,7 +397,7 @@
         "operationId": "approveReturnBorrowedBook",
         "parameters": [
           {
-            "name": "book-id",
+            "name": "bookId",
             "in": "path",
             "required": true,
             "schema": {
@@ -411,7 +421,7 @@
         }
       }
     },
-    "/books/archived/{book-id}": {
+    "/books/archived/{bookId}": {
       "patch": {
         "tags": [
           "Book"
@@ -419,7 +429,7 @@
         "operationId": "updateArchivedStatus",
         "parameters": [
           {
-            "name": "book-id",
+            "name": "bookId",
             "in": "path",
             "required": true,
             "schema": {
@@ -494,7 +504,7 @@
         }
       }
     },
-    "/books/{book-id}": {
+    "/books/{bookId}": {
       "get": {
         "tags": [
           "Book"
@@ -502,7 +512,7 @@
         "operationId": "getBookById",
         "parameters": [
           {
-            "name": "book-id",
+            "name": "bookId",
             "in": "path",
             "required": true,
             "schema": {
@@ -699,13 +709,9 @@
           "comment"
         ]
       },
-      "BookRequest": {
+      "BookCreateRequest": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
           "title": {
             "type": "string"
           },

@@ -10,11 +10,13 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface BorrowBook$Params {
+  bookId: number;
 }
 
-export function borrowBook(http: HttpClient, rootUrl: string, params?: BorrowBook$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+export function borrowBook(http: HttpClient, rootUrl: string, params: BorrowBook$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, borrowBook.PATH, 'patch');
   if (params) {
+    rb.path('bookId', params.bookId, {});
   }
 
   return http.request(
@@ -27,4 +29,4 @@ export function borrowBook(http: HttpClient, rootUrl: string, params?: BorrowBoo
   );
 }
 
-borrowBook.PATH = '/books/borrow/{book-id}';
+borrowBook.PATH = '/books/borrow/{bookId}';

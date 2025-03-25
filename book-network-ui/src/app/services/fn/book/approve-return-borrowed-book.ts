@@ -10,13 +10,13 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface ApproveReturnBorrowedBook$Params {
-  'book-id': number;
+  bookId: number;
 }
 
 export function approveReturnBorrowedBook(http: HttpClient, rootUrl: string, params: ApproveReturnBorrowedBook$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, approveReturnBorrowedBook.PATH, 'patch');
   if (params) {
-    rb.path('book-id', params['book-id'], {});
+    rb.path('bookId', params.bookId, {});
   }
 
   return http.request(
@@ -29,4 +29,4 @@ export function approveReturnBorrowedBook(http: HttpClient, rootUrl: string, par
   );
 }
 
-approveReturnBorrowedBook.PATH = '/books/borrow/return/approve/{book-id}';
+approveReturnBorrowedBook.PATH = '/books/borrow/return/approve/{bookId}';

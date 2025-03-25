@@ -8,14 +8,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { BookRequest } from '../../models/book-request';
+import { BookCreateRequest } from '../../models/book-create-request';
 
-export interface SaveBook$Params {
-      body: BookRequest
+export interface AddNewBook$Params {
+      body: BookCreateRequest
 }
 
-export function saveBook(http: HttpClient, rootUrl: string, params: SaveBook$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
-  const rb = new RequestBuilder(rootUrl, saveBook.PATH, 'post');
+export function addNewBook(http: HttpClient, rootUrl: string, params: AddNewBook$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
+  const rb = new RequestBuilder(rootUrl, addNewBook.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/json');
   }
@@ -30,4 +30,4 @@ export function saveBook(http: HttpClient, rootUrl: string, params: SaveBook$Par
   );
 }
 
-saveBook.PATH = '/books';
+addNewBook.PATH = '/books';

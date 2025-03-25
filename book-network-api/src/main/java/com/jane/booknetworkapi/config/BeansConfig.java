@@ -35,7 +35,7 @@ public class BeansConfig {
         // 允许特定的源
         config.setAllowedOrigins(allowedOrigins);
         // 允许所有的 HTTP 方法
-        config.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        config.setAllowedMethods(Arrays.asList("*"));
         // 允许所有的请求头
         config.setAllowedHeaders(Arrays.asList("*"));
         // 允许携带凭证（如 cookie）

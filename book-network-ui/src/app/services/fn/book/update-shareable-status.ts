@@ -10,13 +10,13 @@ import { RequestBuilder } from '../../request-builder';
 
 
 export interface UpdateShareableStatus$Params {
-  'book-id': number;
+  bookId: number;
 }
 
 export function updateShareableStatus(http: HttpClient, rootUrl: string, params: UpdateShareableStatus$Params, context?: HttpContext): Observable<StrictHttpResponse<number>> {
   const rb = new RequestBuilder(rootUrl, updateShareableStatus.PATH, 'patch');
   if (params) {
-    rb.path('book-id', params['book-id'], {});
+    rb.path('bookId', params.bookId, {});
   }
 
   return http.request(
@@ -29,4 +29,4 @@ export function updateShareableStatus(http: HttpClient, rootUrl: string, params:
   );
 }
 
-updateShareableStatus.PATH = '/books/shareable/{book-id}';
+updateShareableStatus.PATH = '/books/shareable/{bookId}';

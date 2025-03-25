@@ -4,7 +4,7 @@
 
 export { AuthenticationRequest } from './models/authentication-request';
 export { AuthenticationResponse } from './models/authentication-response';
-export { BookRequest } from './models/book-request';
+export { BookCreateRequest } from './models/book-create-request';
 export { BookResponse } from './models/book-response';
 export { BorrowedBookResponse } from './models/borrowed-book-response';
 export { FeedbackRequest } from './models/feedback-request';
