@@ -1,15 +1,13 @@
 import {Component, inject} from '@angular/core';
 import {RegistrationRequest} from '../../services/models/registration-request';
 import {FormsModule} from '@angular/forms';
-import {JsonPipe} from '@angular/common';
 import {Router} from '@angular/router';
 import {AuthenticationService} from '../../services/services';
 
 @Component({
   selector: 'app-register',
   imports: [
-    FormsModule,
-    JsonPipe
+    FormsModule
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -19,7 +17,8 @@ export class RegisterComponent {
     email:'',
     firstname:'',
     lastname:'',
-    password:''
+    password:'',
+    roles:['USER','ADMIN']
   }
 
   errorMsg: Array<string>=[];

@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -31,11 +32,18 @@ public class BookService {
     private final BookTransactionHistoryRepository transactionHistoryRepository;
     private final BookTransactionHistoryRepository bookTransactionHistoryRepository;
 
-    public Integer save(BookRequest request, Authentication authentication) {
-        User user = ((User) authentication.getPrincipal());
-        Book book = bookMapper.toBook(request);
-        book.setOwner(user);
-        return bookRepository.save(book).getId();
+    @Transactional
+    public Integer addNewBook(BookCreateRequest request, Authentication authentication) {
+        try {
+            User user = ((User) authentication.getPrincipal());
+            Book book = bookMapper.toNewBook(request);
+            book.setOwner(user);
+            return bookRepository.save(book).getId();
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public BookResponse findById(Integer bookId) {
