@@ -1,11 +1,11 @@
-import {Component, inject} from '@angular/core';
-import {AuthenticationRequest} from '../../services/models/authentication-request';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../../services/services/authentication.service';
-import {AuthenticationResponse} from '../../services/models/authentication-response';
-import {TokenService} from '../../services/token/token.service';
+import { Component, inject } from '@angular/core';
+import { AuthenticationRequest } from '../../services/models/authentication-request';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/services/authentication.service';
+import { AuthenticationResponse } from '../../services/models/authentication-response';
+import { TokenService } from '../../services/token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +14,7 @@ import {TokenService} from '../../services/token/token.service';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  authRequest: AuthenticationRequest = {email: '', password: ''};
+  authRequest: AuthenticationRequest = { email: '', password: '' };
   errorMsg: Array<String> = [];
 
   private router = inject(Router);
@@ -29,7 +29,9 @@ export class LoginComponent {
     }).subscribe({
       next: (res: AuthenticationResponse): void => {
         this.tokenService.token = res.accessToken as string;
-        this.router.navigate(['books'])
+
+        this.tokenService.isTokenNotValid();
+        this.router.navigate(['/books'])
       },
       error: (err) => {
         if (err.error.validationErrors) {
